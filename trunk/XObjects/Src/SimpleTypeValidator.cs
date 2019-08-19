@@ -115,15 +115,23 @@ namespace Xml.Schema.Linq
 
 
        internal void CompilePatterns(string[] patternStrs) {
-           if (Patterns == null) {
+           if (Patterns == null) 
+           {
                Patterns = new ArrayList();
            }
            else {
                Patterns.Clear();
            }
 
-           foreach (string str in patternStrs) {
-               Patterns.Add(new Regex(str));
+           foreach (string str in patternStrs) 
+           {
+               string str1 = str;
+               if (!str1.StartsWith("^"))
+                   str1 = "^" + str1;
+               if (!str1.EndsWith("$"))
+                   str1 = str1 + "$";
+
+               Patterns.Add(new Regex(str1));
            }
        }
     }
